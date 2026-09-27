@@ -43,16 +43,19 @@ STEP 1 — EXTRACT from the JSON context:
 
 STEP 2 — COMPOSE using ONLY the extracted data. Rules:
 1. SPECIFICITY (MOST IMPORTANT — 10/10 target):
-   - Quote ONLY numbers that appear LITERALLY in the JSON. Do NOT calculate, derive, or infer new numbers.
-   - Anchor on at least 2-3 verifiable facts (e.g., "your views are 2,410 this month, up 18% week-on-week" — both numbers from the JSON).
-   - Name specific offers with exact prices (e.g., "Dental Cleaning @ ₹299").
-   - Reference specific dates, deadlines, or windows from the trigger.
-2. CATEGORY FIT: Match the industry tone. Dentists = clinical/peer. Salons = warm/friendly. Restaurants = operator/hustle. Gyms = coach/motivational. Pharmacies = regulatory/trust.
-3. MERCHANT FIT: Address the owner by first name. Use ALL their preferred languages[] naturally (e.g., if ["en","hi"], use Hinglish). Reference their conversation_history to continue the thread.
-4. TRIGGER RELEVANCE: Clearly state "why now" — the specific trigger event.
-5. ENGAGEMENT COMPULSION: End with a single, clear, low-friction CTA (e.g., "Reply YES to activate" or "Reply 1 or 2").
+   - You must include at least three specific data points in the message (exact view counts, exact percentages, specific INR prices, or exact dates). Never use vague terms like 'increased' or 'many'.
+2. CATEGORY FIT: Adapt your tone based on the category: use a clinical, peer-to-peer tone with 'Dr.' for dentists; a warm, practical tone for salons; and an operator-to-operator tone for restaurants.
+3. MERCHANT FIT: Address the merchant using their exact owner name. Include a localized greeting using their specified preferred languages. Reference their specific active offers rather than generic suggestions.
+4. TRIGGER RELEVANCE: Explicitly state the trigger event in the first sentence to establish urgency (e.g., 'Because your Pro plan expires in 12 days...', 'Since views dropped 30% today...'). Tie the proposed solution directly to this exact event.
+5. ENGAGEMENT COMPULSION: End the message with a single, low-friction Yes/No question. Use loss aversion to drive the CTA (e.g., 'Reply YES within 24 hours to launch this campaign before you lose weekend footfall to competitors').
 6. NO FABRICATION: If a number is NOT in the JSON, do NOT use it. Zero tolerance.
 7. NO URLS: Do not include http/https links.
+
+PERFECT EXAMPLE (DO NOT COPY DATA, COPY STRUCTURE):
+Context JSON: {"business_name": "Dr. Raj Clinic", "performance": {"views_30d": 1200, "delta_views_pct": -0.15}}
+Good Body: "Hi Dr. Raj! Your clinic logged 1,200 views this month, down 15% week-on-week."
+Bad Body: "Your views dropped a lot recently, let's fix it!" (Lacks numbers)
+Bad Body: "Your clinic got 1,200 views, and your calls dropped 10%!" (Fabricated 10% calls)
 
 OUTPUT FORMAT:
 Respond with a pure JSON object containing:
@@ -82,6 +85,12 @@ STEP 2 — COMPOSE using ONLY the extracted data. Rules:
 4. NO FABRICATION: If a number is NOT in the JSON, do NOT use it. Zero tolerance.
 5. NO URLS: Do not include http/https links.
 6. LANGUAGE: Use the customer's language preference exactly (e.g., if "hi-en", write in Hinglish).
+
+PERFECT EXAMPLE (DO NOT COPY DATA, COPY STRUCTURE):
+Context JSON: {"customer_name": "Rohan", "trigger": {"payload": {"due_date": "2026-11-12", "available_slots": [{"date":"Wed 5 Nov", "time":"6pm"}]}}}
+Good Body: "Hi Rohan, Dr. Raj Clinic here! Your next visit is due on 2026-11-12. Reply 1 for Wed 5 Nov 6pm."
+Bad Body: "Hi Rohan, it's time for your visit! We have discounts!" (Generic)
+Bad Body: "Your next visit is due soon. Reply 1 for tomorrow morning." (Fabricated slot)
 
 OUTPUT FORMAT:
 Respond with a pure JSON object containing:
